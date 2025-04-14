@@ -16,7 +16,6 @@ public class CourseService {
     private CourseRepository courseRepository;
 
 
-
     public List<Course> getRecommendedCourses(){
         return courseRepository.findAll();
     }
@@ -28,9 +27,7 @@ public class CourseService {
         return courseRepository.findById(id);
     }
 
-
     public void addCourse (Course course) {
-
         courseRepository.save(course);
     }
 

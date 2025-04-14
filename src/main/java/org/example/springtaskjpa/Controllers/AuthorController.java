@@ -20,9 +20,10 @@ public class AuthorController {
 
     @GetMapping("/author")
     public ResponseEntity<Author> findByEmail(@RequestParam String email){
-        Author author = authorService.findByEmail(email);
 
-        return ResponseEntity.ok(author);
+        return authorService.findByEmail(email)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
 
     }
 }
