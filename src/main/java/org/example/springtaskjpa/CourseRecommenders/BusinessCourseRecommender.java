@@ -1,7 +1,7 @@
 package org.example.springtaskjpa.CourseRecommenders;
 
 import org.example.springtaskjpa.Models.Course;
-import org.example.springtaskjpa.CourseRecommender;
+import org.example.springtaskjpa.Interfaces.CourseRecommender;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;

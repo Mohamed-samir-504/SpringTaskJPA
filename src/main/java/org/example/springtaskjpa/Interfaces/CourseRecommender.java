@@ -1,4 +1,4 @@
-package org.example.springtaskjpa;
+package org.example.springtaskjpa.Interfaces;
 
 import org.example.springtaskjpa.Models.Course;
 

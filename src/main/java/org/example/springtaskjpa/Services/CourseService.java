@@ -1,10 +1,10 @@
 package org.example.springtaskjpa.Services;
 
 
-import org.example.springtaskjpa.CourseRecommender;
+import org.example.springtaskjpa.Interfaces.CourseRecommender;
+import org.example.springtaskjpa.Interfaces.CourseRepository;
 import org.example.springtaskjpa.Models.Course;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,10 +14,13 @@ public class CourseService {
 
     private CourseRecommender courseRecommender;
 
+    @Autowired
+    private CourseRepository courseRepository;
+
     //Using variable name
     //remove primary annotation form softwareCourseRecommender bean first
-    @Autowired
-    private CourseRecommender scienceCourseRecommender;
+    //@Autowired
+    //private CourseRecommender scienceCourseRecommender;
 
 
     //Constructor using qualifier on businessCourseRecommender bean
@@ -38,9 +41,6 @@ public class CourseService {
         return courseRecommender.recommendedCourses();
     }
 
-    List<Course> getScienceRecommendedCourses(){
-        return scienceCourseRecommender.recommendedCourses();
-    }
 
     public void addCourse (Course course) {
         courseRecommender.addCourse(course);
@@ -54,5 +54,8 @@ public class CourseService {
         courseRecommender.deleteCourse(id);
     }
 
+    //    List<Course> getScienceRecommendedCourses(){
+//        return scienceCourseRecommender.recommendedCourses();
+//    }
 
 }
