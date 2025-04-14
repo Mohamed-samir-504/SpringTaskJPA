@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 public class CourseController {
@@ -21,15 +22,12 @@ public class CourseController {
     //shows one course by its name
     //Using parameter request
     @GetMapping("/view")
-    public ResponseEntity<String> viewCourse(@RequestParam String courseName) {
-        List<Course> courses = courseService.getRecommendedCourses();
+    public ResponseEntity<Course> viewCourse(@RequestParam String name) {
 
-        for (Course course : courses) {
-            if (course.getName().equals(courseName)) {
-                return ResponseEntity.ok().body(course.toString());
-            }
-        }
-        return ResponseEntity.notFound().build();
+        return courseService.getCourseByName(name)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
+
     }
 
     //Shows all courses
@@ -53,21 +51,25 @@ public class CourseController {
     // Handles the form submission using model attribute
     @PostMapping("/add-submit")
     public ResponseEntity<String> submitCourse(@ModelAttribute Course course) {
-
+        System.out.println(course);
         courseService.addCourse(course);
         return ResponseEntity.ok("Course added successfully.");
     }
 
     //using request body and path variable
     @PatchMapping("/update/{id}")
-    public ResponseEntity<String> updateCourse(@RequestBody Course course, @PathVariable int id) {
-        course.setId(id);
-        courseService.updateCourse(course);
-        return ResponseEntity.ok().body(course.toString());
+    public ResponseEntity<String> updateCourse(@RequestBody Course course, @PathVariable Long id) {
+        Optional<Course> originalCourse = courseService.getCourseById(id);
+
+        if (originalCourse.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+        courseService.updateCourse(originalCourse.get(),course);
+        return ResponseEntity.ok("Course updated successfully.");
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<String> deleteCourse(@PathVariable int id) {
+    public ResponseEntity<String> deleteCourse(@PathVariable Long id) {
         courseService.deleteCourse(id);
         return ResponseEntity.ok("Course deleted successfully");
     }

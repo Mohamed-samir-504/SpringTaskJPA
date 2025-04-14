@@ -1,52 +1,54 @@
 package org.example.springtaskjpa.Services;
 
 
-import org.example.springtaskjpa.Interfaces.CourseRecommender;
 import org.example.springtaskjpa.Interfaces.CourseRepository;
 import org.example.springtaskjpa.Models.Course;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CourseService {
 
-    private CourseRecommender courseRecommender;
-
     @Autowired
     private CourseRepository courseRepository;
 
-
-    //Using variable name
-    //remove primary annotation form softwareCourseRecommender bean first
-    //@Autowired
-    //private CourseRecommender scienceCourseRecommender;
-
-
-    //Constructor using qualifier on businessCourseRecommender bean
-    //Called by default
-    public CourseService( CourseRecommender courseRecommender) {
-        this.courseRecommender = courseRecommender;
-
-    }
 
 
     public List<Course> getRecommendedCourses(){
         return courseRepository.findAll();
     }
 
+    public Optional<Course> getCourseByName(String name){
+        return courseRepository.findFirstByName(name);
+    }
+    public Optional<Course> getCourseById(Long id){
+        return courseRepository.findById(id);
+    }
+
 
     public void addCourse (Course course) {
-        courseRecommender.addCourse(course);
+
+        courseRepository.save(course);
     }
 
-    public void updateCourse (Course course) {
-        courseRecommender.updateCourse(course);
+    public void updateCourse (Course oldCourse,Course newCourse) {
+        if(oldCourse != null && newCourse != null){
+            if(newCourse.getName() != null) {
+                oldCourse.setName(newCourse.getName());
+            }
+            if(newCourse.getDescription() != null) {
+                oldCourse.setDescription(newCourse.getDescription());
+            }
+            courseRepository.save(oldCourse);
+        }
+
     }
 
-    public void deleteCourse(int id) {
-        courseRecommender.deleteCourse(id);
+    public void deleteCourse(Long id) {
+        courseRepository.deleteById(id);
     }
 
 

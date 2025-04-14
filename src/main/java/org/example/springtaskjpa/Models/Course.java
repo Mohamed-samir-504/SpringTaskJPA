@@ -12,7 +12,7 @@ public class Course {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    private Long id;
 
     private String name;
     private String description;
@@ -34,7 +34,7 @@ public class Course {
 
     //join column is used to specify column name of foreign key mapped to pk of assessment
     @OneToOne
-    @JoinColumn(name = "assessment_id", referencedColumnName = "assessment_id")
+    @JoinColumn(name = "assessment_id", referencedColumnName = "assessment_id", nullable = true)
     private Assessment assessment;
 
 
@@ -43,11 +43,11 @@ public class Course {
     }
 
 
-    public Course(String name, String description) {
-        //this.id = idCounter++;
-        this.name = name;
-        this.description = description;
-    }
+//    public Course(String name, String description) {
+//        //this.id = idCounter++;
+//        this.name = name;
+//        this.description = description;
+//    }
 
 
     @Override
@@ -65,11 +65,11 @@ public class Course {
         this.description = description;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
