@@ -15,9 +15,9 @@ public class ScienceCourseRecommender implements CourseRecommender {
     @Override
     public List<Course> recommendedCourses() {
         this.courses = new ArrayList<Course>();
-        courses.add(new Course("Physics", "Sumerge physics"));
-        courses.add(new Course("Biology", "Sumerge biology"));
-        courses.add(new Course("Chemistry", "Sumerge chemistry"));
+//        courses.add(new Course("Physics", "Sumerge physics"));
+//        courses.add(new Course("Biology", "Sumerge biology"));
+//        courses.add(new Course("Chemistry", "Sumerge chemistry"));
         return courses;
     }
 

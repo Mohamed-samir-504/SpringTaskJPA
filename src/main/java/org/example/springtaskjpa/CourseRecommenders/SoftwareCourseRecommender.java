@@ -16,9 +16,9 @@ public class SoftwareCourseRecommender implements CourseRecommender {
 
     public SoftwareCourseRecommender() {
         this.courses = new ArrayList<Course>();
-        courses.add(new Course("Java", "Sumerge Java"));
-        courses.add(new Course("Spring", "Sumerge Spring"));
-        courses.add(new Course("Maven", "Sumerge Maven"));
+//        courses.add(new Course("Java", "Sumerge Java"));
+//        courses.add(new Course("Spring", "Sumerge Spring"));
+//        courses.add(new Course("Maven", "Sumerge Maven"));
     }
 
     @Override

@@ -10,7 +10,7 @@ public class Author {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    private int author_id;
 
     private String name;
     private String email;
@@ -31,12 +31,12 @@ public class Author {
         this.birthDate = birthDate;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setAuthor_id(int id) {
+        this.author_id = id;
     }
 
-    public int getId() {
-        return id;
+    public int getAuthor_id() {
+        return author_id;
     }
 
     public String getName() {

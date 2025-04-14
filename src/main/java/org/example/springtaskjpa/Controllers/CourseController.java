@@ -34,18 +34,13 @@ public class CourseController {
 
     //Shows all courses
     @GetMapping("/view/all")
-    public ResponseEntity<String> viewAllCourses() {
+    public ResponseEntity<List<Course>> viewAllCourses() {
         List<Course> courses = courseService.getRecommendedCourses();
         if (courses.isEmpty()) {
-            return ResponseEntity.ok("No courses found.");
+            return ResponseEntity.ok().body(null);
         }
 
-        StringBuilder response = new StringBuilder();
-        for (Course course : courses) {
-            response.append(course.toString()).append("\n");
-        }
-
-        return ResponseEntity.ok().body(response + "\n");
+        return ResponseEntity.ok(courses);
 
     }
 

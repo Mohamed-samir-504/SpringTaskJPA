@@ -15,9 +15,9 @@ public class BusinessCourseRecommender implements CourseRecommender {
     @Override
     public List<Course> recommendedCourses() {
         this.courses = new ArrayList<Course>();
-        courses.add(new Course("Business analysis","Sumerge business analysis"));
-        courses.add(new Course("Business law","Sumerge business law"));
-        courses.add(new Course("Business management", "Sumerge business management"));
+//        courses.add(new Course("Business analysis","Sumerge business analysis"));
+//        courses.add(new Course("Business law","Sumerge business law"));
+//        courses.add(new Course("Business management", "Sumerge business management"));
         return courses;
     }
 

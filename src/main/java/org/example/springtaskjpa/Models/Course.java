@@ -8,7 +8,7 @@ import java.util.List;
 @Entity
 public class Course {
 
-    private static int idCounter = 1;
+    //private static int idCounter = 1;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -18,13 +18,23 @@ public class Course {
     private String description;
 
 
+    //Join table is used to declare course as owner and to specify column names
     @ManyToMany
+    @JoinTable(
+            name = "course_authors",
+            joinColumns = @JoinColumn(name = "course_id"),
+            inverseJoinColumns = @JoinColumn(name = "author_id")
+    )
     private List<Author> authors;
 
-    @OneToMany
-    private List<Rating> ratings = new ArrayList<>();
+    //So there is no extra table created between course and rating
+    @OneToMany(mappedBy = "course")
+    private List<Rating> ratings;
 
+
+    //join column is used to specify column name of foreign key mapped to pk of assessment
     @OneToOne
+    @JoinColumn(name = "assessment_id", referencedColumnName = "assessment_id")
     private Assessment assessment;
 
 
@@ -34,7 +44,7 @@ public class Course {
 
 
     public Course(String name, String description) {
-        this.id = idCounter++;
+        //this.id = idCounter++;
         this.name = name;
         this.description = description;
     }

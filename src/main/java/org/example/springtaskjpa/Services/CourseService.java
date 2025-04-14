@@ -17,6 +17,7 @@ public class CourseService {
     @Autowired
     private CourseRepository courseRepository;
 
+
     //Using variable name
     //remove primary annotation form softwareCourseRecommender bean first
     //@Autowired
@@ -26,19 +27,13 @@ public class CourseService {
     //Constructor using qualifier on businessCourseRecommender bean
     //Called by default
     public CourseService( CourseRecommender courseRecommender) {
-
         this.courseRecommender = courseRecommender;
+
     }
 
-    //Setter using primary annotation on softwareCourseRecommender bean
-    //@Autowired
-//    public void setCourseRecommender(CourseRecommender courseRecommender) {
-//        System.out.println("Setter");
-//        this.courseRecommender = courseRecommender;
-//    }
 
     public List<Course> getRecommendedCourses(){
-        return courseRecommender.recommendedCourses();
+        return courseRepository.findAll();
     }
 
 
@@ -54,8 +49,5 @@ public class CourseService {
         courseRecommender.deleteCourse(id);
     }
 
-    //    List<Course> getScienceRecommendedCourses(){
-//        return scienceCourseRecommender.recommendedCourses();
-//    }
 
 }

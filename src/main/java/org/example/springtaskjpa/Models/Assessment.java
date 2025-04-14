@@ -7,11 +7,9 @@ import jakarta.persistence.*;
 public class Assessment {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    private int assessment_id;
 
     private String content;
 
-    @OneToOne
-    private Course course;
 
 }
