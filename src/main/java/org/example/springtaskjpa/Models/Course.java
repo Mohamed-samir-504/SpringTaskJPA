@@ -1,13 +1,32 @@
 package org.example.springtaskjpa.Models;
 
+import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
+@Entity
 public class Course {
 
     private static int idCounter = 1;
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
+
     private String name;
     private String description;
+
+
+    @ManyToMany
+    private List<Author> authors;
+
+    @OneToMany(mappedBy = "course", cascade = CascadeType.ALL)
+    private List<Rating> ratings = new ArrayList<>();
+
+    @OneToOne
+    private Assessment assessment;
+
 
 
     public Course() {
