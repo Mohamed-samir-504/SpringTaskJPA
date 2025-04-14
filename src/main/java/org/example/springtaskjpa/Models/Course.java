@@ -21,7 +21,7 @@ public class Course {
     @ManyToMany
     private List<Author> authors;
 
-    @OneToMany(mappedBy = "course", cascade = CascadeType.ALL)
+    @OneToMany
     private List<Rating> ratings = new ArrayList<>();
 
     @OneToOne
