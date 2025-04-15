@@ -1,4 +1,4 @@
-package org.example.springtaskjpa.Interfaces;
+package org.example.springtaskjpa.Repositories;
 
 import org.example.springtaskjpa.Models.Assessment;
 import org.springframework.data.jpa.repository.JpaRepository;

@@ -1,9 +1,11 @@
 package org.example.springtaskjpa.Services;
 
 
-import org.example.springtaskjpa.Interfaces.CourseRepository;
+import org.example.springtaskjpa.Repositories.CourseRepository;
 import org.example.springtaskjpa.Models.Course;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,6 +18,9 @@ public class CourseService {
     private CourseRepository courseRepository;
 
 
+    public Page<Course> getCoursesPaginated(Pageable pageable) {
+        return courseRepository.findAll(pageable);
+    }
     public List<Course> getRecommendedCourses(){
         return courseRepository.findAll();
     }
@@ -47,6 +52,7 @@ public class CourseService {
     public void deleteCourse(Long id) {
         courseRepository.deleteById(id);
     }
+
 
 
 }

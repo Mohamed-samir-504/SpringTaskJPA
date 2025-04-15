@@ -1,14 +1,11 @@
 package org.example.springtaskjpa.Controllers;
 
-import org.example.springtaskjpa.Interfaces.AuthorRepository;
 import org.example.springtaskjpa.Models.Author;
 import org.example.springtaskjpa.Services.AuthorService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.Optional;
 
 @RestController
 public class AuthorController {

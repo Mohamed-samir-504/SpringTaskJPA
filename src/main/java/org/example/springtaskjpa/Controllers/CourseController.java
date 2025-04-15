@@ -1,7 +1,13 @@
 package org.example.springtaskjpa.Controllers;
 
+import org.example.springtaskjpa.DTO.CourseDTO;
+import org.example.springtaskjpa.Mappers.CourseMapper;
 import org.example.springtaskjpa.Models.Course;
 import org.example.springtaskjpa.Services.CourseService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
@@ -15,6 +21,9 @@ public class CourseController {
     //It will use SoftwareCourseRecommender bean
     CourseService courseService;
 
+    @Autowired
+    CourseMapper courseMapper;
+
     public CourseController(CourseService courseService) {
         this.courseService = courseService;
     }
@@ -22,9 +31,10 @@ public class CourseController {
     //shows one course by its name
     //Using parameter request
     @GetMapping("/view")
-    public ResponseEntity<Course> viewCourse(@RequestParam String name) {
+    public ResponseEntity<CourseDTO> viewCourse(@RequestParam String name) {
 
         return courseService.getCourseByName(name)
+                .map(courseMapper::toDto)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
 
@@ -32,15 +42,33 @@ public class CourseController {
 
     //Shows all courses
     @GetMapping("/view/all")
-    public ResponseEntity<List<Course>> viewAllCourses() {
+    public ResponseEntity<List<CourseDTO>> viewAllCourses() {
         List<Course> courses = courseService.getRecommendedCourses();
         if (courses.isEmpty()) {
             return ResponseEntity.ok().body(null);
         }
 
-        return ResponseEntity.ok(courses);
+        for (Course course : courses) {
+            System.out.println(course.getName());
+            System.out.println(course.getDescription());
+        }
+
+        return ResponseEntity.ok(courseMapper.toDtoList(courses));
 
     }
+
+
+    //show paginated response
+    @GetMapping("/view/pages")
+    public ResponseEntity<Page<Course>> getCourses(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "3") int size) {
+
+        Pageable pageable = PageRequest.of(page, size);
+        Page<Course> courses = courseService.getCoursesPaginated(pageable);
+        return ResponseEntity.ok(courses);
+    }
+
 
     // Shows the form to add a course
     @GetMapping("/add")
@@ -48,11 +76,12 @@ public class CourseController {
         return new RedirectView("/Add.html");
     }
 
+
     // Handles the form submission using model attribute
     @PostMapping("/add-submit")
-    public ResponseEntity<String> submitCourse(@ModelAttribute Course course) {
-        System.out.println(course);
-        courseService.addCourse(course);
+    public ResponseEntity<String> submitCourse(@ModelAttribute CourseDTO course) {
+        //System.out.println(course);
+        courseService.addCourse(courseMapper.toEntity(course));
         return ResponseEntity.ok("Course added successfully.");
     }
 

@@ -1,6 +1,6 @@
 package org.example.springtaskjpa.Services;
 
-import org.example.springtaskjpa.Interfaces.AuthorRepository;
+import org.example.springtaskjpa.Repositories.AuthorRepository;
 import org.example.springtaskjpa.Models.Author;
 import org.springframework.stereotype.Service;
 
