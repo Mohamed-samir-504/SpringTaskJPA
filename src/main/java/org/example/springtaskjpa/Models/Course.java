@@ -43,11 +43,11 @@ public class Course {
     }
 
 
-//    public Course(String name, String description) {
-//        //this.id = idCounter++;
-//        this.name = name;
-//        this.description = description;
-//    }
+    public Course(Long id,String name, String description) {
+        //this.id = idCounter++;
+        this.name = name;
+        this.description = description;
+    }
 
 
     @Override
