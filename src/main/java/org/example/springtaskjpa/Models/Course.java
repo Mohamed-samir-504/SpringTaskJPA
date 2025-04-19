@@ -44,7 +44,7 @@ public class Course {
 
 
     public Course(Long id,String name, String description) {
-        //this.id = idCounter++;
+        this.id = id;
         this.name = name;
         this.description = description;
     }
