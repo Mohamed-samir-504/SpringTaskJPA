@@ -4,13 +4,14 @@ package org.example.springtaskjpa.Mappers;
 import org.mapstruct.factory.Mappers;
 import org.example.springtaskjpa.DTO.CourseDTO;
 import org.example.springtaskjpa.Models.Course;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.Collections;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
+
 
 
 public class CourseMapperTest {
