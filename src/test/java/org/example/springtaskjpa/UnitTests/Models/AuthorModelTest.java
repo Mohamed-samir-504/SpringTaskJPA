@@ -1,5 +1,6 @@
-package org.example.springtaskjpa.Models;
+package org.example.springtaskjpa.UnitTests.Models;
 
+import org.example.springtaskjpa.Models.Author;
 import org.junit.jupiter.api.*;
 
 import java.time.LocalDate;

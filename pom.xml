@@ -87,6 +87,11 @@
             <version>1.5.0.Final</version>
             <scope>provided</scope>
         </dependency>
+        <dependency>
+            <groupId>org.wiremock.integrations</groupId>
+            <artifactId>wiremock-spring-boot</artifactId>
+            <version>3.6.0</version>
+        </dependency>
 
     </dependencies>
 

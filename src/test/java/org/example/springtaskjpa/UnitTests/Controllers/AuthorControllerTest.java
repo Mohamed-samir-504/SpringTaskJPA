@@ -1,10 +1,9 @@
-package org.example.springtaskjpa.Controllers;
+package org.example.springtaskjpa.UnitTests.Controllers;
 
+import org.example.springtaskjpa.Controllers.AuthorController;
 import org.example.springtaskjpa.Models.Author;
 import org.example.springtaskjpa.Services.AuthorService;
-import org.example.springtaskjpa.Services.CourseService;
 import org.junit.jupiter.api.*;
-import static org.junit.jupiter.api.Assertions.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;

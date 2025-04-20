@@ -4,10 +4,12 @@ import org.example.springtaskjpa.DTO.CourseDTO;
 import org.example.springtaskjpa.Mappers.CourseMapper;
 import org.example.springtaskjpa.Models.Course;
 import org.example.springtaskjpa.Services.CourseService;
+import org.example.springtaskjpa.Services.ExternalApiService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
@@ -21,11 +23,14 @@ public class CourseController {
     //It will use SoftwareCourseRecommender bean
     CourseService courseService;
 
+    private ExternalApiService externalApiService;
+
     @Autowired
     CourseMapper courseMapper;
 
-    public CourseController(CourseService courseService) {
+    public CourseController(CourseService courseService, ExternalApiService externalApiService) {
         this.courseService = courseService;
+        this.externalApiService = externalApiService;
     }
 
     //shows one course by its name
@@ -101,6 +106,16 @@ public class CourseController {
     public ResponseEntity<String> deleteCourse(@PathVariable Long id) {
         courseService.deleteCourse(id);
         return ResponseEntity.ok("Course deleted successfully");
+    }
+
+
+    @GetMapping("/courses/{id}/service")
+    public ResponseEntity<String> getRating(@PathVariable Long id) {
+        String json = externalApiService.getService(id); // returns raw JSON string
+        return ResponseEntity
+                .ok()
+                .contentType(MediaType.APPLICATION_JSON) // ✅ add this!
+                .body(json);
     }
 
 

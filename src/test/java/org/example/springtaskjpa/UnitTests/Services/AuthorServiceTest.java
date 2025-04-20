@@ -1,9 +1,10 @@
-package org.example.springtaskjpa.Services;
+package org.example.springtaskjpa.UnitTests.Services;
 
 import jakarta.persistence.EntityNotFoundException;
 import org.example.springtaskjpa.Models.Author;
 import org.example.springtaskjpa.Models.Course;
 import org.example.springtaskjpa.Repositories.AuthorRepository;
+import org.example.springtaskjpa.Services.AuthorService;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;

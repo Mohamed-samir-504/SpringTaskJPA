@@ -1,11 +1,11 @@
-package org.example.springtaskjpa.Controllers;
+package org.example.springtaskjpa.UnitTests.Controllers;
 
+import org.example.springtaskjpa.Controllers.CourseController;
 import org.example.springtaskjpa.DTO.CourseDTO;
 import org.example.springtaskjpa.Mappers.CourseMapper;
 import org.example.springtaskjpa.Models.Course;
 import org.example.springtaskjpa.Services.CourseService;
 import org.junit.jupiter.api.*;
-import static org.junit.jupiter.api.Assertions.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.data.domain.Page;

@@ -1,5 +1,6 @@
-package org.example.springtaskjpa.Models;
+package org.example.springtaskjpa.UnitTests.Models;
 
+import org.example.springtaskjpa.Models.Course;
 import org.junit.jupiter.api.*;
 
 import static org.junit.jupiter.api.Assertions.*;

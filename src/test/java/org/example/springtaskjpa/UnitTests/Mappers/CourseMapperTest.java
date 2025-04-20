@@ -1,6 +1,7 @@
-package org.example.springtaskjpa.Mappers;
+package org.example.springtaskjpa.UnitTests.Mappers;
 
 
+import org.example.springtaskjpa.Mappers.CourseMapper;
 import org.mapstruct.factory.Mappers;
 import org.example.springtaskjpa.DTO.CourseDTO;
 import org.example.springtaskjpa.Models.Course;
