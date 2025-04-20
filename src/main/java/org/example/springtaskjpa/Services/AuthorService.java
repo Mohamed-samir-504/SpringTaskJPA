@@ -14,7 +14,7 @@ public class AuthorService {
         this.authorRepository = authorRepository;
     }
 
-    public Optional<Author> findByEmail(String email){
+    public Optional<Author> getAuthorByEmail(String email){
         return authorRepository.findByEmail(email);
     }
 

@@ -1,10 +1,22 @@
 package org.example.springtaskjpa.Services;
 
+import org.example.springtaskjpa.Models.Course;
 import org.example.springtaskjpa.Repositories.CourseRepository;
+import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+
+import java.util.List;
+import java.util.Optional;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 public class CourseServiceTest {
@@ -15,5 +27,130 @@ public class CourseServiceTest {
     @InjectMocks
     private CourseService courseService;
 
+    @Test
+    void getCoursesPaginated_shouldReturnPageOfCourses() {
 
+        Pageable pageable = PageRequest.of(0, 2);
+        List<Course> mockCourses = List.of(
+                new Course(1L, "Java", "Java course"),
+                new Course(2L, "Spring", "Spring course")
+        );
+        Page<Course> mockPage = new PageImpl<>(mockCourses, pageable, mockCourses.size());
+
+        when(courseRepository.findAll(pageable)).thenReturn(mockPage);
+        Page<Course> result = courseService.getCoursesPaginated(pageable);
+
+        assertEquals(2, result.getContent().size());
+        assertEquals("Java", result.getContent().get(0).getName());
+        assertEquals("Spring", result.getContent().get(1).getName());
+
+    }
+
+    @Test
+    void getRecommendedCourses_shouldReturnAllCourses() {
+
+        List<Course> mockCourses = List.of(
+                new Course(1L, "Java", "Intro to Java"),
+                new Course(2L, "Spring", "Spring course")
+        );
+
+        when(courseRepository.findAll()).thenReturn(mockCourses);
+
+        List<Course> result = courseService.getRecommendedCourses();
+
+        assertEquals(2, result.size());
+        assertEquals("Java", result.get(0).getName());
+        assertEquals("Spring", result.get(1).getName());
+
+    }
+
+    @Test
+    void getCourseByName_shouldReturnCorrectCourse() {
+        Course mockCourse = new Course(1L, "Java", "Java course");
+        when(courseRepository.findFirstByName(mockCourse.getName())).thenReturn(Optional.of(mockCourse));
+
+        Optional<Course> result = courseService.getCourseByName("Java");
+
+        assertEquals(1, result.get().getId());
+        assertEquals("Java", result.get().getName());
+        assertEquals("Java course", result.get().getDescription());
+    }
+
+    @Test
+    void getCourseById_shouldReturnCorrectCourse() {
+        Course mockCourse = new Course(1L, "Java", "Java course");
+        when(courseRepository.findById(mockCourse.getId())).thenReturn(Optional.of(mockCourse));
+        Optional<Course> result = courseService.getCourseById(1L);
+        assertEquals(1, result.get().getId());
+    }
+
+    @Test
+    void addCourse_shouldCallSaveMethod() {
+
+        Course mockCourse = new Course(1L, "Java", "Java course");
+        courseService.addCourse(mockCourse);
+        verify(courseRepository).save(mockCourse);
+    }
+
+    @Test
+    void deleteCourse_shouldCallDeleteByIdMethod() {
+        Long courseId = 1L;
+        courseService.deleteCourse(courseId);
+        verify(courseRepository).deleteById(courseId);
+    }
+
+    @Test
+    void updateCourse_nameAndDescriptionExists_shouldCallSaveMethod() {
+        Course oldMockCourse = new Course(1L, "Java", "Java course");
+        Course newMockCourse = new Course(null,"Spring", "Spring course");
+
+        courseService.updateCourse(oldMockCourse, newMockCourse);
+
+        verify(courseRepository).save(oldMockCourse);
+        assertEquals("Spring", oldMockCourse.getName());
+        assertEquals("Spring course", oldMockCourse.getDescription());
+
+    }
+
+    @Test
+    void updateCourse_onlyNameExists_shouldCallSaveMethod() {
+        Course oldMockCourse = new Course(1L, "Java", "Java course");
+        Course newMockCourse = new Course(null,"Spring", null);
+        courseService.updateCourse(oldMockCourse, newMockCourse);
+        verify(courseRepository).save(oldMockCourse);
+        assertEquals("Spring", oldMockCourse.getName());
+        assertEquals("Java course", oldMockCourse.getDescription());
+    }
+
+    @Test
+    void updateCourse_onlyDescriptionExists_shouldCallSaveMethod(){
+
+        Course oldMockCourse = new Course(1L, "Java", "Java course");
+        Course newMockCourse = new Course(null,null, "Intro to java");
+        courseService.updateCourse(oldMockCourse, newMockCourse);
+        verify(courseRepository).save(oldMockCourse);
+        assertEquals("Java", oldMockCourse.getName());
+        assertEquals("Intro to java", oldMockCourse.getDescription());
+
+    }
+
+    @Test
+    void updateCourse_valuesAreNull_shouldNotUpdate() {
+        Course oldMockCourse = new Course(1L, "Java", "Java course");
+        Course newMockCourse = new Course();
+        courseService.updateCourse(oldMockCourse, newMockCourse);
+        verify(courseRepository).save(oldMockCourse);
+        assertEquals("Java", oldMockCourse.getName());
+        assertEquals("Java course", oldMockCourse.getDescription());
+
+    }
+
+    @Test
+    void updateCourse_courseIsNull_shouldNotCallSaveMethod() {
+        Course oldMockCourse = new Course(1L, "Java", "Java course");
+        Course newMockCourse = null;
+        courseService.updateCourse(oldMockCourse, newMockCourse);
+        verify(courseRepository, never()).save(any());
+
+    }
 }
