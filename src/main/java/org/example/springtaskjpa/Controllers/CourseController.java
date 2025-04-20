@@ -23,14 +23,15 @@ public class CourseController {
     //It will use SoftwareCourseRecommender bean
     CourseService courseService;
 
-    private ExternalApiService externalApiService;
+    @Autowired
+    ExternalApiService externalApiService;
 
     @Autowired
     CourseMapper courseMapper;
 
     public CourseController(CourseService courseService, ExternalApiService externalApiService) {
         this.courseService = courseService;
-        this.externalApiService = externalApiService;
+
     }
 
     //shows one course by its name

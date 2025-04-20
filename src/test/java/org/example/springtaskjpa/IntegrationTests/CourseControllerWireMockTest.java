@@ -19,9 +19,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 
 
-@SpringBootTest(properties = {
-        "external.service.api=http://localhost:8089"
-})
+@SpringBootTest()
 @AutoConfigureMockMvc
 @ActiveProfiles("test")
 
