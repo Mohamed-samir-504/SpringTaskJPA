@@ -12,11 +12,11 @@ import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 
+import java.util.List;
 import java.util.Optional;
 
 import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @WebMvcTest(CourseController.class)
 public class CourseControllerTest {
@@ -32,11 +32,8 @@ public class CourseControllerTest {
 
     @Test
     void viewCourse_shouldReturnCourseDTOByName() throws Exception {
-        Course course = new Course(1L, "Spring", "Spring Boot course");
-        CourseDTO courseDTO = new CourseDTO();
-        courseDTO.setName("Spring");
-        courseDTO.setDescription("Spring Boot course");
-
+        Course course = new Course(1L, "Spring", "Spring course");
+        CourseDTO courseDTO = new CourseDTO("Spring","Spring course");
 
         when(courseService.getCourseByName("Spring")).thenReturn(Optional.of(course));
         when(courseMapper.toDto(course)).thenReturn(courseDTO);
@@ -45,6 +42,47 @@ public class CourseControllerTest {
                         .param("name", "Spring"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.name").value("Spring"))
-                .andExpect(jsonPath("$.description").value("Spring Boot course"));
+                .andExpect(jsonPath("$.description").value("Spring course"));
+    }
+
+    @Test
+    void viewAllCourses_shouldReturnAllCourses() throws Exception {
+        List<Course> courseList = List.of(
+                new Course(1L, "Java", "Java course"),
+                new Course(2L, "Spring", "Spring course")
+        );
+
+        List<CourseDTO> courseDTOList = List.of(
+                new CourseDTO( "Java", "Java course"),
+                new CourseDTO("Spring", "Spring course")
+        );
+
+        when(courseService.getRecommendedCourses()).thenReturn(courseList);
+        when(courseMapper.toDtoList(courseList)).thenReturn(courseDTOList);
+
+        mockMvc.perform(get("/view/all"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.length()").value(2))
+                .andExpect(jsonPath("$[0].name").value("Java"))
+                .andExpect(jsonPath("$[0].description").value("Java course"))
+                .andExpect(jsonPath("$[1].name").value("Spring"))
+                .andExpect(jsonPath("$[1].description").value("Spring course"));
+
+    }
+
+    @Test
+    void viewAllCourses_NoCoursesExist_shouldReturnNull() throws Exception {
+        List<Course> courseList = List.of();
+
+        List<CourseDTO> courseDTOList = List.of();
+
+
+        when(courseService.getRecommendedCourses()).thenReturn(courseList);
+        when(courseMapper.toDtoList(courseList)).thenReturn(courseDTOList);
+
+        mockMvc.perform(get("/view/all"))
+                .andExpect(status().isOk())
+                .andExpect(content().string(""));
+
     }
 }

@@ -8,6 +8,14 @@ public class CourseDTO {
     public String getName() {
         return name;
     }
+
+    public CourseDTO(String name, String description) {
+        this.name = name;
+        this.description = description;
+    }
+
+    public CourseDTO() {}
+
     public void setName(String name) {
         this.name = name;
     }

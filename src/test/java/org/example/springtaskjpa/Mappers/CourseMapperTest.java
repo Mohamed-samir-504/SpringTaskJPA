@@ -45,9 +45,7 @@ public class CourseMapperTest {
 
     @Test
     void toEntity_validCourse_returnsCorrectEntity() {
-        CourseDTO dto = new CourseDTO();
-        dto.setName("Spring Boot");
-        dto.setDescription("REST APIs");
+        CourseDTO dto = new CourseDTO("Spring Boot","REST APIs");
 
         Course course = courseMapper.toEntity(dto);
 
