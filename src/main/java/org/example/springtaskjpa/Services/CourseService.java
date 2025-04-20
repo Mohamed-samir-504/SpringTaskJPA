@@ -49,7 +49,10 @@ public class CourseService {
     }
 
     public void updateCourse (Course oldCourse,Course newCourse) {
-        if(oldCourse != null && newCourse != null){
+        if (!courseRepository.existsById(oldCourse.getId())) {
+            throw new EntityNotFoundException("Course with ID " + oldCourse.getId() + " does not exist");
+        }
+        if(newCourse != null){
             if(newCourse.getName() != null) {
                 oldCourse.setName(newCourse.getName());
             }
@@ -62,6 +65,9 @@ public class CourseService {
     }
 
     public void deleteCourse(Long id) {
+        if (!courseRepository.existsById(id)) {
+            throw new EntityNotFoundException("Course with ID " + id + " does not exist");
+        }
         courseRepository.deleteById(id);
     }
 
