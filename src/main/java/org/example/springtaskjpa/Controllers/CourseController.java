@@ -23,7 +23,6 @@ public class CourseController {
     //It will use SoftwareCourseRecommender bean
     CourseService courseService;
 
-    @Autowired
     ExternalApiService externalApiService;
 
     @Autowired
@@ -31,6 +30,7 @@ public class CourseController {
 
     public CourseController(CourseService courseService, ExternalApiService externalApiService) {
         this.courseService = courseService;
+        this.externalApiService = externalApiService;
 
     }
 

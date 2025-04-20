@@ -33,21 +33,23 @@ class CourseIntegrationTest {
     @Autowired
     private CourseService courseService;
 
-    @BeforeEach
-    void setUp() {
+
+    @Test
+    void shouldReturnCourseDTO_whenCourseExistsByName() throws Exception {
+
         Course course = new Course();
         course.setName("Testing");
         course.setDescription("Testing course");
         courseService.addCourse(course);
-    }
-
-    @Test
-    void shouldReturnCourseDTO_whenCourseExistsByName() throws Exception {
 
         mockMvc.perform(get("/view")
                         .param("name", "Testing"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.name").value("Testing"))
                 .andExpect(jsonPath("$.description").value("Testing course"));
+
+        Optional<Course> addedCourse = courseService.getCourseByName("Testing");
+
+        courseService.deleteCourse(addedCourse.get().getId());
     }
 }
