@@ -31,7 +31,7 @@ public class CourseControllerTest {
     private CourseMapper courseMapper;
 
     @Test
-    void shouldReturnCourseDTOByName() throws Exception {
+    void viewCourse_shouldReturnCourseDTOByName() throws Exception {
         Course course = new Course(1L, "Spring", "Spring Boot course");
         CourseDTO courseDTO = new CourseDTO();
         courseDTO.setName("Spring");
