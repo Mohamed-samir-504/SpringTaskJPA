@@ -1,5 +1,6 @@
 package org.example.springtaskjpa.Services;
 
+import jakarta.persistence.EntityNotFoundException;
 import org.example.springtaskjpa.Models.Author;
 import org.example.springtaskjpa.Models.Course;
 import org.example.springtaskjpa.Repositories.AuthorRepository;
@@ -17,6 +18,7 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -28,7 +30,7 @@ public class AuthorServiceTest {
     private AuthorService authorService;
 
     @Test
-    void findByEmail_shouldReturnCorrectAuthor() {
+    void getAuthorByEmail_authorExists_shouldReturnCorrectAuthor() {
         Author mockAuthor = new Author(1,"mtolba","mtolba@sumerge.com");
 
         when(authorRepository.findByEmail(mockAuthor.getEmail())).thenReturn(Optional.of(mockAuthor));
@@ -39,6 +41,15 @@ public class AuthorServiceTest {
         assertEquals("mtolba", result.get().getName());
         assertEquals("mtolba@sumerge.com", result.get().getEmail());
 
+    }
+
+    @Test
+    void getAuthorByEmail_authorDoesNotExist_shouldThrowEntityNotFoundException() {
+        when(authorRepository.findByEmail("missing@example.com")).thenReturn(Optional.empty());
+
+        assertThrows(EntityNotFoundException.class, () ->
+                authorService.getAuthorByEmail("missing@example.com")
+        );
     }
 }
 

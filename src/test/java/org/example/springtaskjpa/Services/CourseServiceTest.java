@@ -1,5 +1,6 @@
 package org.example.springtaskjpa.Services;
 
+import jakarta.persistence.EntityNotFoundException;
 import org.example.springtaskjpa.Models.Course;
 import org.example.springtaskjpa.Repositories.CourseRepository;
 import org.junit.jupiter.api.*;
@@ -16,6 +17,7 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -65,7 +67,7 @@ public class CourseServiceTest {
     }
 
     @Test
-    void getCourseByName_shouldReturnCorrectCourse() {
+    void getCourseByName_courseExists_shouldReturnCorrectCourse() {
         Course mockCourse = new Course(1L, "Java", "Java course");
         when(courseRepository.findFirstByName(mockCourse.getName())).thenReturn(Optional.of(mockCourse));
 
@@ -77,11 +79,45 @@ public class CourseServiceTest {
     }
 
     @Test
-    void getCourseById_shouldReturnCorrectCourse() {
+    void getCourseByName_NameIsNull_shouldThrowIllegalArgumentException() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            courseService.getCourseByName(null);
+        });
+    }
+
+    @Test
+    void getCourseByName_CourseDoesNotExist_shouldThrowEntityNotFoundException() {
+        when(courseRepository.findFirstByName("C++")).thenReturn(Optional.empty());
+
+        assertThrows(EntityNotFoundException.class, () ->
+                courseService.getCourseByName("C++")
+        );
+    }
+
+
+
+    @Test
+    void getCourseById_courseExists_shouldReturnCorrectCourse() {
         Course mockCourse = new Course(1L, "Java", "Java course");
         when(courseRepository.findById(mockCourse.getId())).thenReturn(Optional.of(mockCourse));
         Optional<Course> result = courseService.getCourseById(1L);
         assertEquals(1, result.get().getId());
+    }
+
+    @Test
+    void getCourseById_IdIsNull_shouldThrowIllegalArgumentException() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            courseService.getCourseById(null);
+        });
+    }
+
+    @Test
+    void getCourseById_CourseDoesNotExist_shouldThrowEntityNotFoundException() {
+        when(courseRepository.findById(25L)).thenReturn(Optional.empty());
+
+        assertThrows(EntityNotFoundException.class, () ->
+                courseService.getCourseById(25L)
+        );
     }
 
     @Test

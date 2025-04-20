@@ -1,6 +1,8 @@
 package org.example.springtaskjpa.Services;
 
 
+import jakarta.persistence.EntityNotFoundException;
+import org.example.springtaskjpa.Exceptions.GlobalExceptionHandler;
 import org.example.springtaskjpa.Repositories.CourseRepository;
 import org.example.springtaskjpa.Models.Course;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,10 +28,20 @@ public class CourseService {
     }
 
     public Optional<Course> getCourseByName(String name){
-        return courseRepository.findFirstByName(name);
+        if (name == null || name.isBlank()) {
+            throw new IllegalArgumentException("Course name must not be blank");
+        }
+        return Optional.ofNullable(courseRepository.findFirstByName(name)
+                .orElseThrow(() -> new EntityNotFoundException("Course with name " + name + " not found")));
+
     }
     public Optional<Course> getCourseById(Long id){
-        return courseRepository.findById(id);
+        if (id == null) {
+            throw new IllegalArgumentException("Course id must not be blank");
+        }
+        return Optional.ofNullable(courseRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Course with id " + id + " not found")));
+
     }
 
     public void addCourse (Course course) {
