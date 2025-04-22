@@ -54,11 +54,6 @@ public class CourseController {
             return ResponseEntity.ok().body(null);
         }
 
-        for (Course course : courses) {
-            System.out.println(course.getName());
-            System.out.println(course.getDescription());
-        }
-
         return ResponseEntity.ok(courseMapper.toDtoList(courses));
 
     }
