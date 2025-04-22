@@ -5034,3 +5034,27 @@ Caused by: org.h2.jdbc.JdbcSQLNonTransientConnectionException: The connection wa
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:690)
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
 	... 94 more
+2025-04-22 19:57:06.988615+02:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "HTE_AUTHOR" already exists; SQL statement:
+create global temporary table HTE_author(author_id integer, birth_date date, rn_ integer not null, email varchar(255), name varchar(255), primary key (rn_)) TRANSACTIONAL [42101-232]
+2025-04-22 19:57:06.991610+02:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "HTE_ASSESSMENT" already exists; SQL statement:
+create global temporary table HTE_assessment(assessment_id integer, rn_ integer not null, content varchar(255), primary key (rn_)) TRANSACTIONAL [42101-232]
+2025-04-22 19:57:08.689761+02:00 jdbc[23]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "HTE_AUTHOR" already exists; SQL statement:
+create global temporary table HTE_author(author_id integer, birth_date date, rn_ integer not null, email varchar(255), name varchar(255), primary key (rn_)) TRANSACTIONAL [42101-232]
+2025-04-22 19:57:08.690762+02:00 jdbc[23]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "HTE_ASSESSMENT" already exists; SQL statement:
+create global temporary table HTE_assessment(assessment_id integer, rn_ integer not null, content varchar(255), primary key (rn_)) TRANSACTIONAL [42101-232]
+2025-04-22 19:57:09.899070+02:00 jdbc[33]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "HTE_AUTHOR" already exists; SQL statement:
+create global temporary table HTE_author(author_id integer, birth_date date, rn_ integer not null, email varchar(255), name varchar(255), primary key (rn_)) TRANSACTIONAL [42101-232]
+2025-04-22 19:57:09.900071+02:00 jdbc[33]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "HTE_ASSESSMENT" already exists; SQL statement:
+create global temporary table HTE_assessment(assessment_id integer, rn_ integer not null, content varchar(255), primary key (rn_)) TRANSACTIONAL [42101-232]
+2025-04-22 19:57:10.499689+02:00 jdbc[43]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "HTE_AUTHOR" already exists; SQL statement:
+create global temporary table HTE_author(author_id integer, birth_date date, rn_ integer not null, email varchar(255), name varchar(255), primary key (rn_)) TRANSACTIONAL [42101-232]
+2025-04-22 19:57:10.500699+02:00 jdbc[43]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "HTE_ASSESSMENT" already exists; SQL statement:
+create global temporary table HTE_assessment(assessment_id integer, rn_ integer not null, content varchar(255), primary key (rn_)) TRANSACTIONAL [42101-232]

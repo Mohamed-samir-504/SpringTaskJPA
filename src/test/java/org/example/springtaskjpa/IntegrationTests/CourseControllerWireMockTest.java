@@ -15,6 +15,7 @@ import com.github.tomakehurst.wiremock.WireMockServer;
 import org.springframework.test.web.servlet.RequestBuilder;
 
 import static com.github.tomakehurst.wiremock.client.WireMock.*;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.httpBasic;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 
@@ -59,7 +60,9 @@ public class CourseControllerWireMockTest {
                         }
                     """)));
 
-        mockMvc.perform(get("/courses/1/service"))
+
+
+        mockMvc.perform(get("/courses/1/service").with(httpBasic("admin", "admin123")))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.courseId").value(1))

@@ -2,12 +2,16 @@ package org.example.springtaskjpa.UnitTests.Controllers;
 
 import org.example.springtaskjpa.Controllers.AuthorController;
 import org.example.springtaskjpa.Models.Author;
+import org.example.springtaskjpa.SecurityConfig;
 import org.example.springtaskjpa.Services.AuthorService;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.context.annotation.Import;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
+
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.httpBasic;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 
 import java.util.Optional;
@@ -17,6 +21,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(AuthorController.class)
+@Import(SecurityConfig.class)
 public class AuthorControllerTest {
 
     @Autowired
@@ -32,10 +37,13 @@ public class AuthorControllerTest {
         when(authorService.getAuthorByEmail("mtolba@sumerge.com")).thenReturn(Optional.of(author));
 
         mockMvc.perform(get("/author")
+                        .with(httpBasic("admin", "admin123"))
                         .param("email", author.getEmail()))
+
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.author_id").value(1))
                 .andExpect(jsonPath("$.name").value("mtolba"))
                 .andExpect(jsonPath("$.email").value("mtolba@sumerge.com"));
     }
+
 }

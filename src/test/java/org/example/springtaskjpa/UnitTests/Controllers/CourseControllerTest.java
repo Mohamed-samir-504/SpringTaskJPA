@@ -4,12 +4,13 @@ import org.example.springtaskjpa.Controllers.CourseController;
 import org.example.springtaskjpa.DTO.CourseDTO;
 import org.example.springtaskjpa.Mappers.CourseMapper;
 import org.example.springtaskjpa.Models.Course;
+import org.example.springtaskjpa.SecurityConfig;
 import org.example.springtaskjpa.Services.CourseService;
 import org.example.springtaskjpa.Services.ExternalApiService;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.context.annotation.Import;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
@@ -25,10 +26,12 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.mockito.Mockito.when;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.httpBasic;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @WebMvcTest(CourseController.class)
+@Import(SecurityConfig.class)
 public class CourseControllerTest {
 
     @Autowired
@@ -124,7 +127,7 @@ public class CourseControllerTest {
 
     @Test
     void showAddForm_shouldRedirectToAddHtml() throws Exception {
-        mockMvc.perform(get("/add"))
+        mockMvc.perform(get("/add").with(httpBasic("admin", "admin123")))
                 .andExpect(status().is3xxRedirection()) // redirect
                 .andExpect(redirectedUrl("/Add.html")); // verify the target
     }
@@ -136,7 +139,7 @@ public class CourseControllerTest {
 
         when(courseMapper.toEntity(any(CourseDTO.class))).thenReturn(course);
 
-        mockMvc.perform(post("/add-submit")
+        mockMvc.perform(post("/add-submit").with(httpBasic("admin", "admin123"))
                         .param("name", "Java")
                         .param("description", "Java Course"))
                 .andExpect(status().isOk())
@@ -149,7 +152,9 @@ public class CourseControllerTest {
     void deleteCourse_shouldReturnSuccessMessage() throws Exception {
         Long courseId = 1L;
 
-        mockMvc.perform(delete("/delete/{id}", courseId))
+        mockMvc.perform(delete("/delete/{id}", courseId)
+                        .header("x-validation-report", "true")
+                        .with(httpBasic("admin", "admin123")))
                 .andExpect(status().isOk())
                 .andExpect(content().string("Course deleted successfully"));
 
@@ -171,6 +176,8 @@ public class CourseControllerTest {
         when(courseService.getCourseById(originalCourse.getId())).thenReturn(Optional.of(originalCourse));
 
         mockMvc.perform(patch("/update/{id}", originalCourse.getId())
+                        .header("x-validation-report", "true")
+                        .with(httpBasic("admin", "admin123"))
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(json))
                 .andExpect(status().isOk())
@@ -185,6 +192,8 @@ public class CourseControllerTest {
         when(courseService.getCourseById(id)).thenReturn(Optional.empty());
 
         mockMvc.perform(patch("/update/{id}", id)
+                        .header("x-validation-report", "true")
+                        .with(httpBasic("admin", "admin123"))
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("""
                             {

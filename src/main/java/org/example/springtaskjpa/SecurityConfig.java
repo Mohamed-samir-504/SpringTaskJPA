@@ -29,7 +29,7 @@ public class SecurityConfig {
                         .requestMatchers("/update/").hasAnyRole("ADMIN")
                         .requestMatchers("/delete/").hasAnyRole("ADMIN")
                         .requestMatchers("/h2-console/**").hasAnyRole("ADMIN")
-                        .requestMatchers("/swagger-ui/**","/view/**", "/login", "/register","/").permitAll()
+                        .requestMatchers("/courses/**","/swagger-ui/**","/view/**","/").permitAll()
                         .anyRequest().authenticated()
                 )
                 .csrf(AbstractHttpConfigurer::disable)
