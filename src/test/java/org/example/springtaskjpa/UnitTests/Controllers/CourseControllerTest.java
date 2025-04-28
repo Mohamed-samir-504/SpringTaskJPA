@@ -6,7 +6,7 @@ import org.example.springtaskjpa.Mappers.CourseMapper;
 import org.example.springtaskjpa.Models.Course;
 import org.example.springtaskjpa.SecurityConfig;
 import org.example.springtaskjpa.Services.CourseService;
-import org.example.springtaskjpa.Services.ExternalApiService;
+import org.example.springtaskjpa.Services.ExternalRatingService;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -44,7 +44,7 @@ public class CourseControllerTest {
     private CourseMapper courseMapper;
 
     @MockitoBean
-    ExternalApiService externalApiService;
+    ExternalRatingService externalApiService;
 
     @Test
     void viewCourse_shouldReturnCourseDTOByName() throws Exception {

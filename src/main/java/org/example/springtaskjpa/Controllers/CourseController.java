@@ -4,7 +4,7 @@ import org.example.springtaskjpa.DTO.CourseDTO;
 import org.example.springtaskjpa.Mappers.CourseMapper;
 import org.example.springtaskjpa.Models.Course;
 import org.example.springtaskjpa.Services.CourseService;
-import org.example.springtaskjpa.Services.ExternalApiService;
+import org.example.springtaskjpa.Services.ExternalRatingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -23,12 +23,12 @@ public class CourseController {
     //It will use SoftwareCourseRecommender bean
     CourseService courseService;
 
-    ExternalApiService externalApiService;
+    ExternalRatingService externalApiService;
 
     @Autowired
     CourseMapper courseMapper;
 
-    public CourseController(CourseService courseService, ExternalApiService externalApiService) {
+    public CourseController(CourseService courseService, ExternalRatingService externalApiService) {
         this.courseService = courseService;
         this.externalApiService = externalApiService;
 
@@ -105,12 +105,12 @@ public class CourseController {
     }
 
 
-    @GetMapping("/courses/{id}/service")
-    public ResponseEntity<String> getRating(@PathVariable Long id) {
-        String json = externalApiService.getService(id); // returns raw JSON string
+    @GetMapping("/courses/rating")
+    public ResponseEntity<String> getRating() {
+        String json = externalApiService.getService();
         return ResponseEntity
                 .ok()
-                .contentType(MediaType.APPLICATION_JSON) // ✅ add this!
+                .contentType(MediaType.APPLICATION_JSON)
                 .body(json);
     }
 

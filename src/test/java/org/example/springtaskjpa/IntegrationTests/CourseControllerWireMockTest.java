@@ -34,10 +34,10 @@ public class CourseControllerWireMockTest {
 
     @BeforeAll
     static void setup() {
-        wireMockServer = new WireMockServer(8089);
+        wireMockServer = new WireMockServer(8099);
         wireMockServer.start();
 
-        configureFor("localhost", 8089);
+        configureFor("localhost", 8099);
     }
 
     @AfterAll
@@ -48,25 +48,47 @@ public class CourseControllerWireMockTest {
     @Test
     void getRating_shouldReturnCustomJsonResponse() throws Exception {
         //Stub external API to return custom JSON
-        stubFor(WireMock.get(urlEqualTo("/service/1"))
+        stubFor(WireMock.get(urlEqualTo("/service"))
                 .willReturn(WireMock.aResponse()
                         .withStatus(200)
                         .withHeader("Content-Type", "application/json")
                         .withBody("""
-                        {
-                            "courseId": 1,
-                            "rating": 5,
-                            "reviews": 125
-                        }
+                        [
+                             {
+                                  "courseId": 1,
+                                  "rating": 4.5,
+                                  "reviews": 150
+                             },
+                             {
+                                  "courseId": 2,
+                                  "rating": 4.7,
+                                  "reviews": 120
+                             },
+                             {
+                                  "courseId": 3,
+                                  "rating": 4.8,
+                                  "reviews": 90
+                             },
+                             {
+                                  "courseId": 4,
+                                  "rating": 4.6,
+                                  "reviews": 100
+                             }
+                        ]
+                                
                     """)));
 
 
 
-        mockMvc.perform(get("/courses/1/service").with(httpBasic("admin", "admin123")))
+        mockMvc.perform(get("/courses/rating").with(httpBasic("admin", "admin123")))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(jsonPath("$.courseId").value(1))
-                .andExpect(jsonPath("$.rating").value(5))
-                .andExpect(jsonPath("$.reviews").value(125));
+                .andExpect(jsonPath("$.length()").value(4)) // 4 courses
+                .andExpect(jsonPath("$[0].courseId").value(1))
+                .andExpect(jsonPath("$[0].rating").value(4.5))
+                .andExpect(jsonPath("$[0].reviews").value(150))
+                .andExpect(jsonPath("$[1].courseId").value(2))
+                .andExpect(jsonPath("$[1].rating").value(4.7))
+                .andExpect(jsonPath("$[1].reviews").value(120));
     }
 }
