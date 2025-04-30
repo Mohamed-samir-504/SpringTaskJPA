@@ -37,6 +37,7 @@ public class AuthorControllerTest {
         when(authorService.getAuthorByEmail("mtolba@sumerge.com")).thenReturn(Optional.of(author));
 
         mockMvc.perform(get("/author")
+                        .header("x-validation-report", "true")
                         .with(httpBasic("admin", "admin123"))
                         .param("email", author.getEmail()))
 

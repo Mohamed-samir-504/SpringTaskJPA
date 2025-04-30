@@ -11,6 +11,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
 
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.httpBasic;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -47,7 +48,8 @@ class CourseIntegrationTest {
         course.setDescription("Testing course");
         courseService.addCourse(course);
 
-        mockMvc.perform(get("/view")
+        mockMvc.perform(get("/courses").header("x-validation-report", "true")
+                        .with(httpBasic("admin", "admin123"))
                         .param("name", "Testing"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.name").value("Testing"))

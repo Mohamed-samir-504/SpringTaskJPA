@@ -80,7 +80,8 @@ public class CourseControllerWireMockTest {
 
 
 
-        mockMvc.perform(get("/courses/rating").with(httpBasic("admin", "admin123")))
+        mockMvc.perform(get("/courses/rating").header("x-validation-report", "true")
+                        .with(httpBasic("admin", "admin123")))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.length()").value(4)) // 4 courses

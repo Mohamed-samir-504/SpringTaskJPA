@@ -12,4 +12,4 @@ All Endpoints
 
 
 Mapping is used with CourseDTO in GET all courses and POST a new course<br>
-Pagination is used in the endpoint /view/page
+Pagination is used in the endpoint /courses/page
