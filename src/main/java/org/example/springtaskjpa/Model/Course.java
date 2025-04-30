@@ -7,7 +7,6 @@ import java.util.List;
 @Entity
 public class Course {
 
-    //private static int idCounter = 1;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
