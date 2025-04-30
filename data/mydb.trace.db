@@ -71,8 +71,8 @@ org.h2.jdbc.JdbcSQLNonTransientConnectionException: Database is already closed (
 	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
 	at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:223)
 	at jdk.proxy2/jdk.proxy2.$Proxy125.save(Unknown Source)
-	at org.example.springtaskjpa.Services.CourseService.addCourse(CourseService.java:36)
-	at org.example.springtaskjpa.Controllers.CourseController.submitCourse(CourseController.java:84)
+	at org.example.springtaskjpa.Service.CourseService.addCourse(CourseService.java:36)
+	at org.example.springtaskjpa.Controller.CourseController.submitCourse(CourseController.java:84)
 	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
 	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
 	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:258)
@@ -148,8 +148,8 @@ org.h2.jdbc.JdbcSQLNonTransientConnectionException: Database is already closed (
 	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
 	at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:223)
 	at jdk.proxy2/jdk.proxy2.$Proxy125.save(Unknown Source)
-	at org.example.springtaskjpa.Services.CourseService.addCourse(CourseService.java:36)
-	at org.example.springtaskjpa.Controllers.CourseController.submitCourse(CourseController.java:84)
+	at org.example.springtaskjpa.Service.CourseService.addCourse(CourseService.java:36)
+	at org.example.springtaskjpa.Controller.CourseController.submitCourse(CourseController.java:84)
 	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
 	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
 	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:258)
@@ -474,8 +474,8 @@ org.h2.jdbc.JdbcSQLNonTransientConnectionException: Database is already closed (
 	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
 	at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:223)
 	at jdk.proxy2/jdk.proxy2.$Proxy125.save(Unknown Source)
-	at org.example.springtaskjpa.Services.CourseService.addCourse(CourseService.java:36)
-	at org.example.springtaskjpa.Controllers.CourseController.submitCourse(CourseController.java:84)
+	at org.example.springtaskjpa.Service.CourseService.addCourse(CourseService.java:36)
+	at org.example.springtaskjpa.Controller.CourseController.submitCourse(CourseController.java:84)
 	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
 	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
 	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:258)
@@ -551,8 +551,8 @@ org.h2.jdbc.JdbcSQLNonTransientConnectionException: Database is already closed (
 	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
 	at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:223)
 	at jdk.proxy2/jdk.proxy2.$Proxy125.save(Unknown Source)
-	at org.example.springtaskjpa.Services.CourseService.addCourse(CourseService.java:36)
-	at org.example.springtaskjpa.Controllers.CourseController.submitCourse(CourseController.java:84)
+	at org.example.springtaskjpa.Service.CourseService.addCourse(CourseService.java:36)
+	at org.example.springtaskjpa.Controller.CourseController.submitCourse(CourseController.java:84)
 	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
 	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
 	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:258)
@@ -877,8 +877,8 @@ org.h2.jdbc.JdbcSQLNonTransientConnectionException: Database is already closed (
 	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
 	at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:223)
 	at jdk.proxy2/jdk.proxy2.$Proxy125.save(Unknown Source)
-	at org.example.springtaskjpa.Services.CourseService.addCourse(CourseService.java:36)
-	at org.example.springtaskjpa.Controllers.CourseController.submitCourse(CourseController.java:84)
+	at org.example.springtaskjpa.Service.CourseService.addCourse(CourseService.java:36)
+	at org.example.springtaskjpa.Controller.CourseController.submitCourse(CourseController.java:84)
 	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
 	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
 	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:258)
@@ -954,8 +954,8 @@ org.h2.jdbc.JdbcSQLNonTransientConnectionException: Database is already closed (
 	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
 	at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:223)
 	at jdk.proxy2/jdk.proxy2.$Proxy125.save(Unknown Source)
-	at org.example.springtaskjpa.Services.CourseService.addCourse(CourseService.java:36)
-	at org.example.springtaskjpa.Controllers.CourseController.submitCourse(CourseController.java:84)
+	at org.example.springtaskjpa.Service.CourseService.addCourse(CourseService.java:36)
+	at org.example.springtaskjpa.Controller.CourseController.submitCourse(CourseController.java:84)
 	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
 	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
 	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:258)
@@ -5113,5 +5113,32 @@ create global temporary table HTE_assessment(assessment_id integer, rn_ integer 
 org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "HTE_AUTHOR" already exists; SQL statement:
 create global temporary table HTE_author(author_id integer, birth_date date, rn_ integer not null, email varchar(255), name varchar(255), primary key (rn_)) TRANSACTIONAL [42101-232]
 2025-04-28 19:23:55.175611+03:00 jdbc[43]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "HTE_ASSESSMENT" already exists; SQL statement:
+create global temporary table HTE_assessment(assessment_id integer, rn_ integer not null, content varchar(255), primary key (rn_)) TRANSACTIONAL [42101-232]
+2025-04-29 12:13:13.308852+03:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "INSERT [*]IGNORE INTO Author(author_id, name, email, birth_Date) VALUES (1, 'Alice Smith', 'alice@example.com', '1985-04-12'), (2, 'Bob Johnson', 'bob@example.com', '1978-09-23'), (3, 'Carla Gomez', 'carla@example.com', '1990-01-17')"; expected "INTO"; SQL statement:
+INSERT IGNORE INTO Author(author_id, name, email, birth_Date) VALUES (1, 'Alice Smith', 'alice@example.com', '1985-04-12'), (2, 'Bob Johnson', 'bob@example.com', '1978-09-23'), (3, 'Carla Gomez', 'carla@example.com', '1990-01-17') [42001-232]
+2025-04-30 11:09:56.137196+03:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "HTE_AUTHOR" already exists; SQL statement:
+create global temporary table HTE_author(author_id integer, birth_date date, rn_ integer not null, email varchar(255), name varchar(255), primary key (rn_)) TRANSACTIONAL [42101-232]
+2025-04-30 11:09:56.142192+03:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "HTE_ASSESSMENT" already exists; SQL statement:
+create global temporary table HTE_assessment(assessment_id integer, rn_ integer not null, content varchar(255), primary key (rn_)) TRANSACTIONAL [42101-232]
+2025-04-30 11:09:57.886170+03:00 jdbc[23]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "HTE_AUTHOR" already exists; SQL statement:
+create global temporary table HTE_author(author_id integer, birth_date date, rn_ integer not null, email varchar(255), name varchar(255), primary key (rn_)) TRANSACTIONAL [42101-232]
+2025-04-30 11:09:57.888170+03:00 jdbc[23]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "HTE_ASSESSMENT" already exists; SQL statement:
+create global temporary table HTE_assessment(assessment_id integer, rn_ integer not null, content varchar(255), primary key (rn_)) TRANSACTIONAL [42101-232]
+2025-04-30 11:09:59.250337+03:00 jdbc[33]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "HTE_AUTHOR" already exists; SQL statement:
+create global temporary table HTE_author(author_id integer, birth_date date, rn_ integer not null, email varchar(255), name varchar(255), primary key (rn_)) TRANSACTIONAL [42101-232]
+2025-04-30 11:09:59.251335+03:00 jdbc[33]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "HTE_ASSESSMENT" already exists; SQL statement:
+create global temporary table HTE_assessment(assessment_id integer, rn_ integer not null, content varchar(255), primary key (rn_)) TRANSACTIONAL [42101-232]
+2025-04-30 11:09:59.920678+03:00 jdbc[43]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "HTE_AUTHOR" already exists; SQL statement:
+create global temporary table HTE_author(author_id integer, birth_date date, rn_ integer not null, email varchar(255), name varchar(255), primary key (rn_)) TRANSACTIONAL [42101-232]
+2025-04-30 11:09:59.921678+03:00 jdbc[43]: exception
 org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "HTE_ASSESSMENT" already exists; SQL statement:
 create global temporary table HTE_assessment(assessment_id integer, rn_ integer not null, content varchar(255), primary key (rn_)) TRANSACTIONAL [42101-232]
